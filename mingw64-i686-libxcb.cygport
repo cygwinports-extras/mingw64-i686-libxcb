@@ -1,5 +1,8 @@
+CROSS_HOST="i686-w64-mingw32"
+inherit cross
+
 NAME="mingw64-i686-libxcb"
-VERSION=1.8.1
+VERSION=1.9
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="X Protocol C-Language Bindings for Win32 toolchain"
@@ -7,12 +10,9 @@ DESCRIPTION="This package does NOT contain cygwin binaries.  Instead, it
 contains msvcrt-linked binaries (aka 'mingw').  It is for use with the
 mingw64-i686-gcc cross compiler, and installs into the
 /usr/i686-w64-mingw32/sys-root/mingw/{lib,include} directories."
-CROSS_HOST="i686-w64-mingw32"
-ORIG_PN="libxcb"
-inherit cross
-
 HOMEPAGE="http://xcb.sourceforge.net/"
-SRC_URI="http://xcb.freedesktop.org/dist/${ORIG_PN}-${PV}.tar.bz2"
+SRC_URI="http://xcb.freedesktop.org/dist/libxcb-${VERSION}.tar.bz2"
+SRC_DIR="libxcb-${VERSION}"
 PATCH_URI="01-no-pthread-stubs.patch"
 
 LIBS="-lpthread -lws2_32"
@@ -26,5 +26,5 @@ CYGCONF_ARGS="
 	--disable-xv
 	--disable-xvmc
 "
-MAKEOPTS+=" docdirs= "
+MAKEOPTS+=" docdirs= man_MANS= "
 KEEP_LA_FILES="none"
