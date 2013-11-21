@@ -2,7 +2,7 @@ CROSS_HOST="i686-w64-mingw32"
 inherit cross
 
 NAME="mingw64-i686-libxcb"
-VERSION=1.9
+VERSION=1.9.1
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="X Protocol C-Language Bindings for Win32 toolchain"
@@ -18,13 +18,35 @@ PATCH_URI="01-no-pthread-stubs.patch"
 LIBS="-lpthread -lws2_32"
 CYGCONF_ARGS="
 	--disable-build-docs
+	--enable-composite
+	--enable-damage
+	--disable-dpms
 	--disable-dri2
+	--enable-glx
+	--enable-randr
+	--enable-record
+	--enable-render
+	--enable-resource
+	--enable-screensaver
 	--disable-selinux
+	--enable-shape
+	--disable-shm
+	--enable-sync
 	--disable-xevie
+	--enable-xfixes
 	--disable-xfree86-dri
+	--enable-xinerama
+	--enable-xinput
+	--enable-xkb
 	--disable-xprint
+	--enable-xtest
 	--disable-xv
 	--disable-xvmc
 "
-MAKEOPTS+=" docdirs= man_MANS= "
+
+src_install() {
+	cd ${B}
+	cyginstall docdirs= man_MANS=
+}
+
 KEEP_LA_FILES="none"
